@@ -23,12 +23,8 @@ class escroute extends Component {
         uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
       },
       text: '',
-      itineraries: []
-    };
-  }
-  componentDidMount(){
-    //this.state.getRequest(); 
-    (function(){
+      itineraries: [],
+      getRequest: function(){
       fetch('http://localhost:3000/classes/itineraries', {
         method: 'GET'
       })
@@ -41,7 +37,11 @@ class escroute extends Component {
       .catch(function(err) {
         console.log('err', err);
       });
-    }).bind(this)();
+    }.bind(this)
+    };
+  }
+  componentDidMount(){
+    this.state.getRequest(); 
   }
 
   render() { 
