@@ -12,7 +12,8 @@ import {
   View,
   Image,
   ScrollView, 
-  TextInput
+  TextInput,
+  TouchableHighlight
 } from 'react-native';
 
 class escroute extends Component {
@@ -22,22 +23,30 @@ class escroute extends Component {
       pic: {
         uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
       },
-      text: '',
+      username: '',
+      password: '',
       itineraries: [],
       getRequest: function(){
-      fetch('http://localhost:3000/classes/itineraries', {
-        method: 'GET'
-      })
-      .then(function(response) {
-        return response.json(); 
-      }).then(function(data){
-        this.setState({itineraries: data});
-        console.log('itineraries', this.state.itineraries); 
-      }.bind(this))
-      .catch(function(err) {
-        console.log('err', err);
-      });
-    }.bind(this)
+        fetch('http://localhost:3000/classes/itineraries', {
+          method: 'GET'
+        })
+        .then(function(response) {
+          return response.json(); 
+        }).then(function(data){
+          this.setState({itineraries: data});
+          console.log('itineraries', this.state.itineraries); 
+        }.bind(this))
+        .catch(function(err) {
+          console.log('err', err);
+        });
+      }.bind(this),
+      loginButton: function(){
+        console.log('username', this.state.username);
+        console.log('password', this.state.password);
+
+
+        
+      }.bind(this)
     };
   }
   componentDidMount(){
@@ -54,12 +63,26 @@ class escroute extends Component {
 
         <TextInput
           style={{height: 40}}
-          placeholder="Enter the city!"
-          onChangeText={(text) => this.setState({text})}
+          placeholder="Please enter the user name here"
+          onChangeText={(username) => this.setState({username})}
         />
 
+        <TextInput
+          style={{height: 40}}
+          placeholder="Please enter the password here"
+          onChangeText={(password) => this.setState({password})}
+        />
+
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.state.loginButton}>
+          <View>
+            <Text style={styles.buttonText}>Login</Text>
+          </View>
+        </TouchableHighlight>
+
         <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.text}
+          {this.state.username}
         </Text>
 
         <Image source={this.state.pic} style={{width: 200, height: 200}}/>
