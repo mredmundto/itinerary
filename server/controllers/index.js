@@ -87,6 +87,7 @@ module.exports = {
   ************************************************/
   itineraries: {
     get: function(req, res) {
+      console.log('here');
       db.Itinerary.findAll({include: [db.User]})
       .then(function(itineraries) {
         res.json(itineraries);

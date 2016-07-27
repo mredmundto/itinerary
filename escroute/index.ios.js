@@ -23,23 +23,25 @@ class escroute extends Component {
         uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
       },
       text: '',
-      getRequest: function(){
-        fetch('https://jsonplaceholder.typicode.com/posts/1')
-        .then(function(response) {
-          return response.json(); 
-        }).then(function(data){
-          console.log(data); 
-        })
-        .catch(function(err) {
-          console.log('err', err);
-        });
-      }
-
+      itineraries: []
     };
   }
   componentDidMount(){
-    console.log('componentDidMount here');
-    this.state.getRequest(); 
+    //this.state.getRequest(); 
+    (function(){
+      fetch('http://localhost:3000/classes/itineraries', {
+        method: 'GET'
+      })
+      .then(function(response) {
+        return response.json(); 
+      }).then(function(data){
+        this.setState({itineraries: data});
+        console.log('itineraries', this.state.itineraries); 
+      }.bind(this))
+      .catch(function(err) {
+        console.log('err', err);
+      });
+    }).bind(this)();
   }
 
   render() { 
@@ -62,9 +64,14 @@ class escroute extends Component {
 
         <Image source={this.state.pic} style={{width: 200, height: 200}}/>
 
+
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
         </Text>
+
+        {this.state.itineraries.map(itinerary => <Text style={styles.welcome}> {itinerary.location} </Text>
+        )}
+
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
