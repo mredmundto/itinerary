@@ -27,9 +27,8 @@ class escroute extends Component {
       password: '',
       itineraries: [],
       getRequest: function(){
-        fetch('http://localhost:3000/classes/itineraries', {
-          method: 'GET'
-        })
+        fetch('http://localhost:3000/classes/itineraries', 
+        {method: 'GET'})
         .then(function(response) {
           return response.json(); 
         }).then(function(data){
@@ -41,11 +40,23 @@ class escroute extends Component {
         });
       }.bind(this),
       loginButton: function(){
-        console.log('username', this.state.username);
-        console.log('password', this.state.password);
-
-
+        // console.log('username', this.state.username);
+        // console.log('password', this.state.password);
         
+        var data = {
+          username: this.state.username,
+          password: this.state.password
+        };
+        fetch('http://localhost:3000/classes/login', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          credentials: 'same-origin',
+          body: JSON.stringify(data)
+        })
+
       }.bind(this)
     };
   }
@@ -122,6 +133,11 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  buttonText: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  }
 });
 
 AppRegistry.registerComponent('escroute', () => escroute);
