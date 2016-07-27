@@ -20,27 +20,39 @@ class escroute extends Component {
     super(props);
     this.state = {
       pic: {
-        uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+        uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
       },
-      text: ''
+      text: '',
+      getRequest: function(){
+        fetch('https://jsonplaceholder.typicode.com/posts/1')
+        .then(function(response) {
+          return response.json(); 
+        }).then(function(data){
+          console.log(data); 
+        })
+        .catch(function(err) {
+          console.log('err', err);
+        });
+      }
+
     };
   }
+  componentDidMount(){
+    console.log('componentDidMount here');
+    this.state.getRequest(); 
+  }
 
-
-  render() {
-
-    console.log('testing');
-
+  render() { 
     return (
       <ScrollView>
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to ESC!
         </Text>
 
         <TextInput
           style={{height: 40}}
-          placeholder="Type here to translate!"
+          placeholder="Enter the city!"
           onChangeText={(text) => this.setState({text})}
         />
 
@@ -48,7 +60,7 @@ class escroute extends Component {
           {this.state.text}
         </Text>
 
-        <Image source={this.state.pic} style={{width: 193, height: 110}}/>
+        <Image source={this.state.pic} style={{width: 200, height: 200}}/>
 
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
