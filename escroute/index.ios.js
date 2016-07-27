@@ -26,27 +26,30 @@ class escroute extends Component {
       username: '',
       password: '',
       itineraries: [],
+      
       getRequest: function(){
+        
+        //fetch('https://http://esc-route.herokuapp.com/classes/itineraries', 
         fetch('http://localhost:3000/classes/itineraries', 
         {method: 'GET'})
         .then(function(response) {
           return response.json(); 
         }).then(function(data){
           this.setState({itineraries: data});
-          console.log('itineraries', this.state.itineraries); 
+          console.log('all itineraries', this.state.itineraries); 
         }.bind(this))
         .catch(function(err) {
           console.log('err', err);
         });
       }.bind(this),
+
       loginButton: function(){
-        // console.log('username', this.state.username);
-        // console.log('password', this.state.password);
-        
         var data = {
           username: this.state.username,
           password: this.state.password
         };
+
+        //fetch('https://esc-route.herokuapp.com/classes/login', {
         fetch('http://localhost:3000/classes/login', {
           method: 'POST',
           headers: {
@@ -55,13 +58,14 @@ class escroute extends Component {
           },
           credentials: 'same-origin',
           body: JSON.stringify(data)
-        })
-
+        }).then(function(){
+          this.state.getRequest();       
+        }.bind(this));
       }.bind(this)
     };
   }
   componentDidMount(){
-    this.state.getRequest(); 
+    //this.state.getRequest(); 
   }
 
   render() { 
@@ -69,7 +73,9 @@ class escroute extends Component {
       <ScrollView>
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to ESC!
+          Welcome to ESC!{'\n'}
+          Login with your account
+          <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
         <TextInput
@@ -96,14 +102,14 @@ class escroute extends Component {
           {this.state.username}
         </Text>
 
-        <Image source={this.state.pic} style={{width: 200, height: 200}}/>
-
-
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          Login to show all itineraries
         </Text>
 
-        {this.state.itineraries.map(itinerary => <Text style={styles.welcome}> {itinerary.location} </Text>
+        {this.state.itineraries.map(function(itinerary){
+          return <Text style={styles.welcome}> {itinerary.location} by {itinerary.User.name}</Text>  
+        }
+        
         )}
 
         <Text style={styles.instructions}>
@@ -122,11 +128,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    margin: 10,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 30,
   },
   instructions: {
     textAlign: 'center',
