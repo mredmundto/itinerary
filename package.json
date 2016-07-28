@@ -6,8 +6,7 @@
   "scripts": {
     "start": "nodemon server/app.js",
     "build:dev": "node_modules/.bin/webpack -w",
-    "build:prod": "node_modules/.bin/webpack",
-    "postinstall": "npm run build:prod"
+    "build:prod": "node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",

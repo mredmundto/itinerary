@@ -5,5 +5,5 @@ data/*
 public/components/*
 .DS_Store
 public/.DS_Store
-
+public/bundle.js
 .env
