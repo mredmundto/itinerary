@@ -1,4 +1,8 @@
-let PlannerView = (props) => {
+import React from 'react';
+
+import {DayView} from './DayView';
+
+export let PlannerView = (props) => {
   if (props.events.length > 0) {
     return (
       <div>
@@ -9,17 +13,17 @@ let PlannerView = (props) => {
         <div>
           <select onChange={props.handleChange} id="selected">
             {props.yelpEvents.map(event => {
-               return <option>{event.name}</option>;
+               return <option key={event.name}>{event.name}</option>;
              })}
           </select>
           <select onChange={props.handleChange} id="day">
             {_.range(1, props.numDays + 1).map(day => {
-               return <option>{day}</option>;
+               return <option key={day}>{day}</option>;
              })}
           </select>
           <select onChange={props.handleChange} id="slot">
             {_.range(1, 4).map(slot => {
-               return <option>{slot}</option>;
+               return <option key={slot}>{slot}</option>;
              })}
           </select>
 
@@ -27,7 +31,7 @@ let PlannerView = (props) => {
         </div>        
         <div>
           {_.range(1, props.numDays + 1).map((day) => {
-            return (<DayView day={day} events={props.events}/>);
+            return (<DayView key={day} day={day} events={props.events}/>);
           })}
         </div>
       </div>
@@ -35,6 +39,6 @@ let PlannerView = (props) => {
   } else {
     return (
       <h1> Create an Itinerary </h1>
-    )
+    );
   }
-}
+};

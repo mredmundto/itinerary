@@ -1,5 +1,8 @@
 // FIX: Hard coded the test data instead of passing in w/ props
-class LocationItineraryView extends React.Component {
+import React from 'react';
+import ExpandedItineraryView from './ExpandedItineraryView';
+
+export default class LocationItineraryView extends React.Component {
 
   constructor(props) {
     // Equivalent to ES5's React.Component.call(this, props)

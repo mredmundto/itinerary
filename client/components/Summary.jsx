@@ -1,4 +1,6 @@
-var Summary = ({data}) => {
+import React from 'react';
+
+export let Summary = ({data}) => {
   // Note that the image in return is hardcoded for now
   return (
     <div className="summary">
