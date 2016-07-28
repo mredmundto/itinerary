@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 
 export default class signIn extends Component{
-//class escroute extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -26,48 +25,12 @@ export default class signIn extends Component{
       },
       username: '',
       password: '',
-      itineraries: [],
-      
-      getRequest: () => {
-        
-        //fetch('https://http://esc-route.herokuapp.com/classes/itineraries', 
-        fetch('http://localhost:3000/classes/itineraries', 
-        {method: 'GET'})
-        .then(function(response) {
-          return response.json(); 
-        }).then((data) => {
-          this.setState({itineraries: data});
-          console.log('all itineraries', this.state.itineraries); 
-        })
-        .catch(function(err) {
-          console.log('err', err);
-        });
-      },
-
-      loginButton: function(){
-        var data = {
-          username: this.state.username,
-          password: this.state.password
-        };
-        this.setState({password: ''});
-        //fetch('https://esc-route.herokuapp.com/classes/login', {
-        fetch('http://localhost:3000/classes/login', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          credentials: 'same-origin',
-          body: JSON.stringify(data)
-        }).then(function(){
-          this.state.getRequest();       
-        }.bind(this));
-      }.bind(this)
+      itineraries: []
     };
   }
-  componentDidMount(){
-    console.log('logging from sign in');
-    //this.state.getRequest(); 
+
+  componentDidMount(){ 
+
   }
 
   render() { 
@@ -97,9 +60,17 @@ export default class signIn extends Component{
 
         <TouchableHighlight
           style={styles.button}
-          onPress={this.state.loginButton}>
+          onPress={this.loginButton.bind(this)}>
           <View>
             <Text style={styles.buttonText}>Login</Text>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.state.loginButton}>
+          <View>
+            <Text style={styles.buttonText}>Sign Up here!</Text>
           </View>
         </TouchableHighlight>
 
@@ -125,13 +96,51 @@ export default class signIn extends Component{
       </View>
     );
   }
+
+  signUp (){
+
+    //changing route 
+  }
+  // refactoring the AJAX call here
+  loginButton () {
+    var data = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    this.setState({password: ''});
+    fetch('http://localhost:3000/classes/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(data)
+    })
+    .then(function(){
+      this.getRequest();       
+    }.bind(this));
+  }
+
+  // get reuqest
+  getRequest () {
+    fetch('http://localhost:3000/classes/itineraries', 
+    {method: 'GET'})
+    .then(function(response) {
+      return response.json(); 
+    }).then((data) => {
+      this.setState({itineraries: data});
+      console.log('all itineraries', this.state.itineraries); 
+    })
+    .catch(function(err) {
+      console.log('err', err);
+    });
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: 'white',
     margin: 10,
   },
@@ -149,8 +158,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-
+  }
 });
-
-//AppRegistry.registerComponent('escroute', () => escroute);

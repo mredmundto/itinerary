@@ -23,7 +23,6 @@ class escroute extends Component {
 
   renderScene(route, navigator) {
     var Component = routes[route.name];
-    console.log('rendering Scene', Component); 
     return <Component route={route} navigator={navigator} />;
   }
 
@@ -31,7 +30,7 @@ class escroute extends Component {
     return (
       <Navigator
         style={styles.container}
-        initialRoute={{name: 'signIn'}}
+        initialRoute={{name: 'signUp'}}
         renderScene={this.renderScene}
         configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
         />
