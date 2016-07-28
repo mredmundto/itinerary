@@ -74,8 +74,7 @@ export default class signUp extends Component{
       <ScrollView>
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to ESC!{'\n'}
-          Sign Up here
+          Sign up here!  
           <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
