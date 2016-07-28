@@ -5,14 +5,13 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server/app.js",
-    "build:dev": "babel client/components --watch --out-dir public/components --presets=es2015,react --source-maps inline",
-    "build:prod": "babel client/components --out-dir public/components --presets=es2015,react --source-maps inline",
-    "test": "node test/test.js",
+    "build:dev": "node_modules/.bin/webpack -w",
+    "build:prod": "node_modules/.bin/webpack",
     "postinstall": "npm run build:prod"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/defiant-linens/itinerary.git"
+    "url": "git+https://github.com/grandiose-potatoes/itinerary.git"
   },
   "author": "defiant-linens",
   "license": "ISC",

@@ -73,7 +73,7 @@
 
 	var _LoginView2 = _interopRequireDefault(_LoginView);
 
-	var _LandingView = __webpack_require__(248);
+	var _LandingView = __webpack_require__(239);
 
 	var _LandingView2 = _interopRequireDefault(_LandingView);
 
@@ -26833,7 +26833,7 @@
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: '/landing', className: 'navbar-brand logo' },
-	              'Wonder Wander ',
+	              'esc ',
 	              _react2.default.createElement('i', { className: 'fa fa-paper-plane-o', 'aria-hidden': 'true' })
 	            )
 	          ),
@@ -27110,7 +27110,145 @@
 	exports.default = LoginView;
 
 /***/ },
-/* 239 */,
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(173);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LandingView = function (_React$Component) {
+		_inherits(LandingView, _React$Component);
+
+		function LandingView(props) {
+			_classCallCheck(this, LandingView);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LandingView).call(this, props));
+
+			_this.state = {
+				locations: []
+			};
+			return _this;
+		}
+
+		_createClass(LandingView, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				//public token for mapbox
+				L.mapbox.accessToken = 'pk.eyJ1IjoibW9mdGhlY3Jvc3MiLCJhIjoiY2lyNXBkNnliMDA5Z2c4bTFweWJlN2dyaCJ9.dBygwwib3OjYEypyhSMVDg';
+				var example = [{
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [-77.031952, 38.913184]
+					}
+				}, {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [-122.413682, 37.775408]
+					}
+				}];
+
+				var map = L.mapbox.map('map', 'mapbox.streets').setView([37.8, -96], 4);
+
+				var myLayer = L.mapbox.featureLayer().setGeoJSON(example).addTo(map);
+				// mapGeo.scrollWheelZoom.enable();
+
+				this.serverRequest = function ajax(url, data) {
+					var _this2 = this;
+
+					fetch(url, {
+						headers: {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json'
+						},
+						credentials: 'same-origin',
+						method: 'POST',
+						body: JSON.stringify(data)
+					}, this).then(function (res) {
+						return res.json();
+					}).then(function (json) {
+						var locations = json.map(function (item) {
+							return item.location;
+						});
+						console.log(locations);
+						_this2.setState({ locations: locations });
+					}).catch(function (err) {
+						console.log(err);
+					});
+				}.bind(this)('/classes/userItineraries', { user: window.user });
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'container' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'jumbotron' },
+						_react2.default.createElement(
+							'h1',
+							{ className: 'ole' },
+							'esc ',
+							_react2.default.createElement('i', { className: 'fa fa-paper-plane-o smLogo', 'aria-hidden': 'true' })
+						),
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/choose-planner', className: 'btn btn-success' },
+							'Create Itinerary'
+						),
+						_react2.default.createElement(
+							'span',
+							null,
+							'   '
+						),
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/itineraries', className: 'btn btn-success' },
+							'View All Itineraries'
+						),
+						_react2.default.createElement(
+							'span',
+							null,
+							'   '
+						),
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/user-itineraries', className: 'btn btn-success' },
+							'View My Itineraries'
+						)
+					),
+					_react2.default.createElement('div', { className: 'mapsize', id: 'map' })
+				);
+			}
+		}]);
+
+		return LandingView;
+	}(_react2.default.Component);
+
+	exports.default = LandingView;
+
+/***/ },
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28035,145 +28173,6 @@
 
 	exports.default = UserItineraryView;
 	;
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(173);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LandingView = function (_React$Component) {
-		_inherits(LandingView, _React$Component);
-
-		function LandingView(props) {
-			_classCallCheck(this, LandingView);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LandingView).call(this, props));
-
-			_this.state = {
-				locations: []
-			};
-			return _this;
-		}
-
-		_createClass(LandingView, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				//public token for mapbox
-				L.mapbox.accessToken = 'pk.eyJ1IjoibW9mdGhlY3Jvc3MiLCJhIjoiY2lyNXBkNnliMDA5Z2c4bTFweWJlN2dyaCJ9.dBygwwib3OjYEypyhSMVDg';
-				var example = [{
-					"type": "Feature",
-					"geometry": {
-						"type": "Point",
-						"coordinates": [-77.031952, 38.913184]
-					}
-				}, {
-					"type": "Feature",
-					"geometry": {
-						"type": "Point",
-						"coordinates": [-122.413682, 37.775408]
-					}
-				}];
-
-				var map = L.mapbox.map('map', 'mapbox.streets').setView([37.8, -96], 4);
-
-				var myLayer = L.mapbox.featureLayer().setGeoJSON(example).addTo(map);
-				// mapGeo.scrollWheelZoom.enable();
-
-				this.serverRequest = function ajax(url, data) {
-					var _this2 = this;
-
-					fetch(url, {
-						headers: {
-							'Accept': 'application/json',
-							'Content-Type': 'application/json'
-						},
-						credentials: 'same-origin',
-						method: 'POST',
-						body: JSON.stringify(data)
-					}, this).then(function (res) {
-						return res.json();
-					}).then(function (json) {
-						var locations = json.map(function (item) {
-							return item.location;
-						});
-						console.log(locations);
-						_this2.setState({ locations: locations });
-					}).catch(function (err) {
-						console.log(err);
-					});
-				}.bind(this)('/classes/userItineraries', { user: window.user });
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'container' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'jumbotron' },
-						_react2.default.createElement(
-							'h1',
-							{ className: 'ole' },
-							'Wonder Wander ',
-							_react2.default.createElement('i', { className: 'fa fa-paper-plane-o smLogo', 'aria-hidden': 'true' })
-						),
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/choose-planner', className: 'btn btn-success' },
-							'Create Itinerary'
-						),
-						_react2.default.createElement(
-							'span',
-							null,
-							'   '
-						),
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/itineraries', className: 'btn btn-success' },
-							'View All Itineraries'
-						),
-						_react2.default.createElement(
-							'span',
-							null,
-							'   '
-						),
-						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/user-itineraries', className: 'btn btn-success' },
-							'View My Itineraries'
-						)
-					),
-					_react2.default.createElement('div', { className: 'mapsize', id: 'map' })
-				);
-			}
-		}]);
-
-		return LandingView;
-	}(_react2.default.Component);
-
-	exports.default = LandingView;
 
 /***/ }
 /******/ ]);

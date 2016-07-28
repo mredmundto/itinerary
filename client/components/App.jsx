@@ -31,7 +31,7 @@ export let App = props => {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link to="/landing" className="navbar-brand logo">Wonder Wander <i className="fa fa-paper-plane-o" aria-hidden="true"></i></Link>
+              <Link to="/landing" className="navbar-brand logo">esc <i className="fa fa-paper-plane-o" aria-hidden="true"></i></Link>
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav navbar-right">

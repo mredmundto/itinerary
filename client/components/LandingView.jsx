@@ -3,14 +3,14 @@ import {Link} from 'react-router';
 
 export default class LandingView extends React.Component {
 
-	constructor (props) {
-		super (props);
+  constructor (props) {
+	  super(props);
 
-		this.state = {
-			locations: []
+	  this.state = {
+	    locations: []
 		};
 	}
-	componentDidMount() {
+  componentDidMount() {
 		//public token for mapbox
 		L.mapbox.accessToken = 'pk.eyJ1IjoibW9mdGhlY3Jvc3MiLCJhIjoiY2lyNXBkNnliMDA5Z2c4bTFweWJlN2dyaCJ9.dBygwwib3OjYEypyhSMVDg';
 		var example = [
@@ -51,13 +51,13 @@ export default class LandingView extends React.Component {
 				})
 				.then(json => {
 					var locations = json.map(function(item) {
-						return item.location
+						return item.location;
 					})
-					console.log(locations)
+					console.log(locations);
 					this.setState({locations: locations});
 				})
 				.catch(err => {
-					console.log(err)
+					console.log(err);
 				});
 		}.bind(this)('/classes/userItineraries', {user: window.user});
 	}
@@ -66,7 +66,7 @@ export default class LandingView extends React.Component {
 		return (
 			<div className='container'>
 				<div className='jumbotron'>
-					<h1 className='ole'>Wonder Wander <i className='fa fa-paper-plane-o smLogo' aria-hidden='true'></i></h1>
+					<h1 className='ole'>esc <i className='fa fa-paper-plane-o smLogo' aria-hidden='true'></i></h1>
 					<Link to='/choose-planner' className='btn btn-success'>Create Itinerary</Link><span>   </span>
 					<Link to='/itineraries' className='btn btn-success'>View All Itineraries</Link><span>   </span>
 					<Link to='/user-itineraries' className='btn btn-success'>View My Itineraries</Link>
