@@ -7,13 +7,8 @@ class LandingView extends React.Component {
 			locations: []
 		};
 	}
-
-
 	componentDidMount() {
-
-
-
-		var geojson = [
+		var example = [
 			{
 				"type": "Feature",
 				"geometry": {
@@ -30,12 +25,11 @@ class LandingView extends React.Component {
 			}
 		];
 
-		var map_Geo = L.mapbox.map('map_geo', 'mapbox.light')
+		var map = L.mapbox.map('map', 'mapbox.streets')
 		.setView([37.8, -96], 4);
 
-	var myLayer = L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map_Geo);
-	mapGeo.scrollWheelZoom.disable();
-
+		var myLayer = L.mapbox.featureLayer().setGeoJSON(example).addTo(map);
+		// mapGeo.scrollWheelZoom.enable();
 
 		this.serverRequest = function ajax(url, data) {
 			fetch(url, {
@@ -61,9 +55,6 @@ class LandingView extends React.Component {
 					console.log(err)
 				});
 		}.bind(this)('/classes/userItineraries', {user: window.user});
-
-
-
 	}
 
 	render() {
@@ -75,7 +66,7 @@ class LandingView extends React.Component {
 					<Link to='/itineraries' className='btn btn-success'>View All Itineraries</Link><span>   </span>
 					<Link to='/user-itineraries' className='btn btn-success'>View My Itineraries</Link>
 				</div>
-				<div className='mapsize' id='map_geo'></div>
+				<div className='mapsize' id='map'></div>
 				<div>{this.state.locations.map((location) =>
 					{return <h2>{location}</h2> }
 				)}
