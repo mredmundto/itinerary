@@ -30,7 +30,7 @@ class escroute extends Component {
     return (
       <Navigator
         style={styles.container}
-        initialRoute={{name: 'signUp'}}
+        initialRoute={{name: 'signIn'}}
         renderScene={this.renderScene}
         configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
         />

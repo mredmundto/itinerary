@@ -25,6 +25,7 @@ export default class signIn extends Component{
       },
       username: '',
       password: '',
+      confirmPassword: '', 
       itineraries: []
     };
   }
@@ -58,6 +59,8 @@ export default class signIn extends Component{
           onChangeText={(password) => this.setState({password})}
         />
 
+
+
         <TouchableHighlight
           style={styles.button}
           onPress={this.loginButton.bind(this)}>
@@ -68,9 +71,9 @@ export default class signIn extends Component{
 
         <TouchableHighlight
           style={styles.button}
-          onPress={this.state.loginButton}>
+          onPress={this.signUp.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>Sign Up here!</Text>
+            <Text style={styles.buttonText}>Sign Up </Text>
           </View>
         </TouchableHighlight>
 
@@ -87,19 +90,13 @@ export default class signIn extends Component{
         }
         
         )}
-
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
       </ScrollView>
       </View>
     );
   }
 
   signUp (){
-
-    //changing route 
+    this.props.navigator.push({name: 'signUp'});
   }
   // refactoring the AJAX call here
   loginButton () {
