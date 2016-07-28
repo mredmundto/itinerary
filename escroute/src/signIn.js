@@ -105,6 +105,7 @@ export default class signIn extends Component{
       password: this.state.password
     };
     this.setState({password: ''});
+    
     fetch('http://localhost:3000/classes/login', {
       method: 'POST',
       headers: {
@@ -121,8 +122,16 @@ export default class signIn extends Component{
 
   // get reuqest
   getRequest () {
-    fetch('http://localhost:3000/classes/itineraries', 
-    {method: 'GET'})
+
+    fetch('http://localhost:3000/classes/userItineraries', 
+    {method: 'POST',
+     headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+     },
+     credentials: 'same-origin',        
+     body: JSON.stringify({user: this.state.username})
+    })
     .then(function(response) {
       return response.json(); 
     }).then((data) => {
