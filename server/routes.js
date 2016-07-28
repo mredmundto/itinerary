@@ -10,9 +10,7 @@ router.post('/login', controllers.users.login);
 
 router.get('/logout', controllers.users.logout);
 
-//router.get('/itineraries', util.checkUser, controllers.itineraries.get);
-// not check the password yet
-router.get('/itineraries', controllers.itineraries.get);
+router.get('/itineraries', util.checkUser, controllers.itineraries.get);
 
 router.post('/itineraries', util.checkUser, controllers.itineraries.post);
 
