@@ -1,5 +1,9 @@
 // FIX: Hard coded the test data instead of passing in w/ props
-class ItineraryView extends React.Component {
+import React from 'react';
+
+import ExpandedItineraryView from './ExpandedItineraryView';
+
+export default class ItineraryView extends React.Component {
 
   constructor(props) {
     // Equivalent to ES5's React.Component.call(this, props)
@@ -43,4 +47,4 @@ class ItineraryView extends React.Component {
       </div>
     );
   }
-};
+}

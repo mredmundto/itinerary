@@ -1,4 +1,6 @@
-var EventView = (props) => {
+import React from 'react';
+
+export let EventView = (props) => {
 
   if (props.events.length > 0) {
 
@@ -41,5 +43,5 @@ var EventView = (props) => {
       {renderTags}
     </div>
   );
-}
+};
 

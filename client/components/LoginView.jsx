@@ -1,4 +1,6 @@
-class LoginView extends React.Component {
+import React from 'react';
+
+export default class LoginView extends React.Component {
 
   constructor (props) {
     super(props);
@@ -53,7 +55,7 @@ class LoginView extends React.Component {
     this.logout = event => {
       console.log('logging out');
       this.serverRequest('/classes/logout');
-    }
+    };
 
   }
 

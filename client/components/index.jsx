@@ -1,17 +1,28 @@
 // Awkward importing of dependencies
-var Router = ReactRouter.Router,
-    hashHistory = ReactRouter.hashHistory,
-    Route = ReactRouter.Route,
-    IndexRoute = ReactRouter.IndexRoute,
-    IndexRedirect = ReactRouter.IndexRedirect,
-    Home = ReactRouter.Home,
-    Link = ReactRouter.Link;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Router, hashHistory, Route, IndexRoute, IndexRedirect, Home, Link} from 'react-router';
+import {App} from './App';
+import SignupView from './SignupView';
+import LoginView from './LoginView';
+import LandingView from './LandingView';
+import ChoosePlannerView from './ChoosePlannerView';
+import ItineraryView from './ItineraryView';
+import UserItineraryView from './UserItineraryView';
+
+// var Router = ReactRouter.Router,
+//     hashHistory = ReactRouter.hashHistory,
+//     Route = ReactRouter.Route,
+//     IndexRoute = ReactRouter.IndexRoute,
+//     IndexRedirect = ReactRouter.IndexRedirect,
+//     Home = ReactRouter.Home,
+//     Link = ReactRouter.Link;
 
 var requireAuth = function() {
   if (!window.user) {
-    window.location.hash='login';
+    window.location.hash = 'login';
   }
-}
+};
 
 ReactDOM.render((
   <Router history={hashHistory}>

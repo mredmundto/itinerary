@@ -1,4 +1,7 @@
-class ChoosePlannerView extends React.Component {
+import React from 'react';
+import {PlannerView} from './PlannerView';
+
+export default class ChoosePlannerView extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,13 +36,13 @@ class ChoosePlannerView extends React.Component {
         this.setState({numDays: this.getDateDiff()});
       }        
     });
-  };
+  }
 
 
   getDateDiff() {
     var start = this.state.startDate;
     var end = this.state.endDate;
-    var dayInMilliseconds = 1000 * 60 * 60 * 24
+    var dayInMilliseconds = 1000 * 60 * 60 * 24;
     if (start && end) {
       var startDate = new Date(start);
       var endDate = new Date(end);
@@ -49,7 +52,7 @@ class ChoosePlannerView extends React.Component {
     }
 
     return (numDays && numDays > 0) ? numDays : 0;
-  };
+  }
 
   serverRequest(url, data, callback) {
     // If second parameter is empty function performs a GET request
@@ -76,7 +79,7 @@ class ChoosePlannerView extends React.Component {
   }
 
   getItinerary() {
-    console.log('getting itinerary')
+    console.log('getting itinerary');
     this.serverRequest(
       '/classes/events',
       { location: this.state.location },
@@ -100,13 +103,13 @@ class ChoosePlannerView extends React.Component {
     newEvents[index] = target;
     newEvents[targetIdx] = temp;
     this.setState({events: newEvents});
-  };
+  }
 
   handleChange(event) {
     var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(newState);
-  };
+  }
 
   formatYelpData(data) {
     // Make the events from yelp nice
@@ -169,7 +172,7 @@ class ChoosePlannerView extends React.Component {
     this.serverRequest('/classes/itineraries', data, (json) => {
       this.setState({
         itineraryId: json.id
-      })
+      });
     });
   }
 

@@ -1,4 +1,7 @@
-var App = props => {
+import React from 'react';
+import {Link} from 'react-router';
+
+export let App = props => {
   var userLogout = event => {
     window.user = undefined;
     fetch('/classes/logout', {

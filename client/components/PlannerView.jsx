@@ -1,4 +1,8 @@
-let PlannerView = (props) => {
+import React from 'react';
+
+import {DayView} from './DayView';
+
+export let PlannerView = (props) => {
   if (props.events.length > 0) {
     return (
       <div>

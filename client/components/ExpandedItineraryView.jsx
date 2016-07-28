@@ -1,4 +1,7 @@
-class ExpandedItineraryView extends React.Component {
+import React from 'react';
+import {Summary} from './Summary';
+
+export default class ExpandedItineraryView extends React.Component {
 
   constructor(props) {
     super(props);
@@ -43,8 +46,8 @@ class ExpandedItineraryView extends React.Component {
     };
 
     this.toggleExpand = () => {
-      this.setState({expand: !this.state.expand})
-    }
+      this.setState({expand: !this.state.expand});
+    };
   }
 
   componentWillMount() {
@@ -54,7 +57,6 @@ class ExpandedItineraryView extends React.Component {
         '/classes/itineraryEvents',
         {id: this.props.itinerary.id},
         function(data) {
-          console.log()
           var newState = {
             events: data
           };

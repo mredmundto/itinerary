@@ -1,4 +1,7 @@
-var DayView = (props) => {
+import React from 'react';
+import {EventView} from './EventView';
+
+export let DayView = (props) => {
   return (
     <div>
       <h6>Day {props.day}</h6>
@@ -11,4 +14,4 @@ var DayView = (props) => {
 
     </div>
   );
-}
+};

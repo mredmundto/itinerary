@@ -1,13 +1,18 @@
-L.mapbox.accessToken = 'pk.eyJ1IjoibW9mdGhlY3Jvc3MiLCJhIjoiY2lyNXBkNnliMDA5Z2c4bTFweWJlN2dyaCJ9.dBygwwib3OjYEypyhSMVDg';
-class LandingView extends React.Component {
-	constructor(props) {
-		super(props);
+import React from 'react';
+import {Link} from 'react-router';
+
+export default class LandingView extends React.Component {
+
+	constructor (props) {
+		super (props);
 
 		this.state = {
 			locations: []
 		};
 	}
 	componentDidMount() {
+		//public token for mapbox
+		L.mapbox.accessToken = 'pk.eyJ1IjoibW9mdGhlY3Jvc3MiLCJhIjoiY2lyNXBkNnliMDA5Z2c4bTFweWJlN2dyaCJ9.dBygwwib3OjYEypyhSMVDg';
 		var example = [
 			{
 				"type": "Feature",
