@@ -8,7 +8,7 @@ export let DayView = (props) => {
 
       <div>
         {_.range(0, 3).map((eventID) => 
-          <EventView eventID={eventID} events={props.events} day={props.day}/>
+          <EventView eventID={eventID} events={props.events} day={props.day} key={eventID} />
         )}
       </div>
 

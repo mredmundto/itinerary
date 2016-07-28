@@ -121,7 +121,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: 'itineraries', component: _ItineraryView2.default, onEnter: requireAuth }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'user-itineraries', component: _UserItineraryView2.default, onEnter: requireAuth })
 	  )
-	), document.body);
+	), document.getElementById('app'));
 
 /***/ },
 /* 2 */
@@ -27451,7 +27451,7 @@
 	          props.yelpEvents.map(function (event) {
 	            return _react2.default.createElement(
 	              'option',
-	              null,
+	              { key: event.name },
 	              event.name
 	            );
 	          })
@@ -27462,7 +27462,7 @@
 	          _.range(1, props.numDays + 1).map(function (day) {
 	            return _react2.default.createElement(
 	              'option',
-	              null,
+	              { key: day },
 	              day
 	            );
 	          })
@@ -27473,7 +27473,7 @@
 	          _.range(1, 4).map(function (slot) {
 	            return _react2.default.createElement(
 	              'option',
-	              null,
+	              { key: slot },
 	              slot
 	            );
 	          })
@@ -27488,7 +27488,7 @@
 	        'div',
 	        null,
 	        _.range(1, props.numDays + 1).map(function (day) {
-	          return _react2.default.createElement(_DayView.DayView, { day: day, events: props.events });
+	          return _react2.default.createElement(_DayView.DayView, { key: day, day: day, events: props.events });
 	        })
 	      )
 	    );
@@ -27534,7 +27534,7 @@
 	      'div',
 	      null,
 	      _.range(0, 3).map(function (eventID) {
-	        return _react2.default.createElement(_EventView.EventView, { eventID: eventID, events: props.events, day: props.day });
+	        return _react2.default.createElement(_EventView.EventView, { eventID: eventID, events: props.events, day: props.day, key: eventID });
 	      })
 	    )
 	  );
@@ -27576,7 +27576,7 @@
 	        { className: 'panel-heading' },
 	        _react2.default.createElement(
 	          'h5',
-	          { 'class': 'panel-title' },
+	          { className: 'panel-title' },
 	          _react2.default.createElement(
 	            'a',
 	            { className: 'white-text', href: event.url },
@@ -27649,7 +27649,7 @@
 	            categoryArray.map(function (category) {
 	              return _react2.default.createElement(
 	                'span',
-	                { className: 'label label-success category-right' },
+	                { key: category, className: 'label label-success category-right' },
 	                category
 	              );
 	            })
@@ -28165,18 +28165,7 @@
 							'View My Itineraries'
 						)
 					),
-					_react2.default.createElement('div', { className: 'mapsize', id: 'map' }),
-					_react2.default.createElement(
-						'div',
-						null,
-						this.state.locations.map(function (location) {
-							return _react2.default.createElement(
-								'h2',
-								null,
-								location
-							);
-						})
-					)
+					_react2.default.createElement('div', { className: 'mapsize', id: 'map' })
 				);
 			}
 		}]);

@@ -72,12 +72,7 @@ export default class LandingView extends React.Component {
 					<Link to='/user-itineraries' className='btn btn-success'>View My Itineraries</Link>
 				</div>
 				<div className='mapsize' id='map'></div>
-				<div>{this.state.locations.map((location) =>
-					{return <h2>{location}</h2> }
-				)}
-				</div>
-
 			</div>
-		)
+		);
 	}
 }

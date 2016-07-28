@@ -13,7 +13,7 @@ export let EventView = (props) => {
 
     var renderTags = <div className="panel panel-success">
       <div className="panel-heading">
-        <h5 class="panel-title"><a className="white-text" href={event.url}>{event.name}</a></h5>
+        <h5 className="panel-title"><a className="white-text" href={event.url}>{event.name}</a></h5>
       </div>
       <div className="panel-body">
         <div>
@@ -29,7 +29,7 @@ export let EventView = (props) => {
           <p><strong>Review: </strong> {event.snippet}</p>
         </div>
         <div>
-          <p><strong>Categories: </strong>{categoryArray.map(category => <span className="label label-success category-right">{category}</span>)}</p>
+          <p><strong>Categories: </strong>{categoryArray.map(category => <span key={category} className="label label-success category-right">{category}</span>)}</p>
         </div>
       </div>
     </div>;

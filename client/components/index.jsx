@@ -37,4 +37,4 @@ ReactDOM.render((
       <Route path='user-itineraries' component={UserItineraryView} onEnter={requireAuth} />
     </Route>
   </Router>
-), document.body);
+), document.getElementById('app'));
