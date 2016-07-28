@@ -25,6 +25,8 @@ export default class signIn extends Component{
       },
       username: '',
       password: '',
+      confirmPassword: '', 
+      errorMessage: '', 
       itineraries: []
     };
   }
@@ -39,7 +41,7 @@ export default class signIn extends Component{
       <ScrollView style={styles.container}>
         <Text style={styles.welcome}>
  
-          This is sign up!
+          SIGN UP HERE!
           <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
@@ -58,80 +60,75 @@ export default class signIn extends Component{
           onChangeText={(password) => this.setState({password})}
         />
 
+        <TextInput
+        secureTextEntry = {true}
+          style={{height: 40}}
+          placeholder="Please re-enter the password here"
+          value = {this.state.confirmPassword}
+          onChangeText={(confirmPassword) => this.setState({confirmPassword})}
+        />
+
         <TouchableHighlight
           style={styles.button}
-          onPress={this.loginButton.bind(this)}>
+          onPress={this.signUp.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Sign Up</Text>
           </View>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.button}
-          onPress={this.state.loginButton}>
+          onPress={this.backToSignIn.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>Sign Up here!</Text>
+            <Text style={styles.buttonText}>back to sign in!</Text>
           </View>
         </TouchableHighlight>
 
-        <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.username}
+        <Text style={{padding: 10, fontSize: 20, color: 'red',}}>
+          {this.state.errorMessage}
         </Text>
 
-        <Text style={styles.instructions}>
-          Login to show all itineraries
-        </Text>
-
-        {this.state.itineraries.map(function(itinerary, index){
-          return <Text key={index} style={styles.welcome}> {itinerary.location} by {itinerary.User.name}</Text>;  
-        }
-        
-        )}
-
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
       </ScrollView>
       </View>
     );
   }
 
+  backToSignIn () {
+    this.props.navigator.pop();
+  }
   // refactoring the AJAX call here
-  loginButton () {
-    var data = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    this.setState({password: ''});
-    fetch('http://localhost:3000/classes/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(data)
-    })
-    .then(function(){
-      this.getRequest();       
-    }.bind(this));
+
+  goToViewAll (){
+   this.props.navigator.push({name: 'viewAll'}); 
   }
 
-  // get reuqest
-  getRequest () {
-    fetch('http://localhost:3000/classes/itineraries', 
-    {method: 'GET'})
-    .then(function(response) {
-      return response.json(); 
-    }).then((data) => {
-      this.setState({itineraries: data});
-      console.log('all itineraries', this.state.itineraries); 
-    })
-    .catch(function(err) {
-      console.log('err', err);
-    });
+  signUp () {
+
+    if (this.state.password === this.state.confirmPassword ){
+      var data = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      this.setState({password: ''});
+      this.setState({confirmPassword: ''});
+      fetch('http://localhost:3000/classes/signup', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(data)
+      })
+      .then(function(){
+        console.log('user created!');   
+        this.goToViewAll();     
+      }.bind(this));
+    }else{
+      this.setState({errorMessage: 'Passwords do not match'});
+    }
   }
+
 }
 
 const styles = StyleSheet.create({
