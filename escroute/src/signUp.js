@@ -113,6 +113,7 @@ export default class signIn extends Component{
       };
       this.setState({password: ''});
       this.setState({confirmPassword: ''});
+
       fetch('https://esccc.herokuapp.com/classes/signup', {
         method: 'POST',
         headers: {

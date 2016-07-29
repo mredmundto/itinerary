@@ -62,7 +62,6 @@ export default class viewOne extends Component{
   } 
 
   getRequest () {
-
     fetch('https://esccc.herokuapp.com/classes/itineraryEvents', 
     {method: 'POST',
      headers: {

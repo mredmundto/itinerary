@@ -64,7 +64,6 @@ export default class viewAll extends Component{
    this.props.navigator.push({name: 'viewAll'}); 
   }
 
-  // get reuqest
   getRequest () {
     
     fetch('https://esccc.herokuapp.com/classes/userItineraries', 
@@ -73,9 +72,8 @@ export default class viewAll extends Component{
       'Accept': 'application/json',
       'Content-Type': 'application/json'
      },
-     credentials: 'same-origin',
-     body: JSON.stringify({user: this.props.username})        
-     //body: JSON.stringify({user: this.props.username})
+     credentials: 'same-origin',        
+     body: JSON.stringify({user: this.props.username})
     })
     .then(function(response) {
       return response.json(); 
@@ -108,6 +106,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   buttonText: {
+
     fontSize: 10,
     fontWeight: 'bold', 
     padding:15, 

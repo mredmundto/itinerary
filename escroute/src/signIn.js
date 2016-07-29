@@ -102,7 +102,6 @@ export default class signIn extends Component{
     };
     this.setState({password: ''});
     
-
     fetch('https://esccc.herokuapp.com/classes/login', {
     //fetch('http://localhost:3000/classes/login', {
       method: 'POST',
