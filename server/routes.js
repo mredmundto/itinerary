@@ -28,4 +28,6 @@ router.post('/events', controllers.events.post);
 
 router.post('/itineraryEvents', util.checkUser, controllers.events.getItineraryEvents);
 
+router.post('/city', controllers.city.getNomad);
+
 module.exports = router;

@@ -20,7 +20,7 @@ exports.requestNomad = function(city, callback) {
   /* Add the query string to the url */
   var apiURL = url + city;
 
-  // console.log('This is the apiURL: ' + apiURL.toLowerCase());
+  console.log('This is the apiURL: ' + apiURL.toLowerCase());
 
   /* Then we use request to send make the API Request */
   request(apiURL.toLowerCase(), function(error, response, body) {

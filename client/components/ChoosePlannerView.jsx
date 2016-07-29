@@ -21,7 +21,8 @@ export default class ChoosePlannerView extends React.Component {
       slot: '1',
       selected: '',
       itineraryId: null,
-      selectedCity: null
+      selectedCity: null,
+      nomadData: null
     };
   }
 
@@ -204,29 +205,29 @@ export default class ChoosePlannerView extends React.Component {
     console.log('This is the selectedCity state: ', this.state.selectedCity);
   }
 
-  serverRequest2(url, data) {
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-    .then(res => {
-      console.log('Successful serverRequest2 POST-request', res);
-      return res.json();
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
+  // serverRequest2(url, data) {
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(res => {
+  //     console.log('Successful serverRequest2 POST-request', res);
+  //     return res.json();
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+  // }
 
   getNomad() {
     console.log('getting nomad');
-    this.serverRequest2(
+    this.serverRequest(
       '/classes/city',
-      {location: this.state.location}, console.log
+      this.state.selectedCity, this.formatNomadData.bind(this)
     );
   }
 
@@ -234,6 +235,12 @@ export default class ChoosePlannerView extends React.Component {
     console.log('getting getData');
     this.getItinerary();
     this.getNomad();
+  }
+
+  formatNomadData(data) {
+    this.setState({
+      nomadData: data.result[0].info.weather.type
+    });
   }
 
   render() {
@@ -268,6 +275,10 @@ export default class ChoosePlannerView extends React.Component {
             <button className="btn btn-success" onClick={this.getData.bind(this)}>Preference-Based Itinerary</button>
           </div>
         </div>
+
+        <h2>City Facts</h2>
+        <div>{this.state.nomadData}</div>
+
         <div>
           <PlannerView 
             location={this.state.location} 

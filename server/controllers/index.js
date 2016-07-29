@@ -274,6 +274,33 @@ module.exports = {
   },
 
   /************************************************
+    // Requests to /city
+    ************************************************/  
+  city: {
+    getNomad: function(req, res) {
+      //split the city into an array
+      //[San Franciso, CA, United States]
+
+      //san-francisco-ca-united-states
+
+      //{name: "Oakland", lat: 37.8043637, lng: -122.2711137, state: "CA", country: "United States"}
+      var city = req.body;
+
+      var completeCity = '';
+
+      if (city.state) {
+        completeCity = city.name.replace(/\s+/g, '-') + '-' + city.state + '-' + city.country.replace(/\s+/g, '-');
+      } else {
+        completeCity = city.name.replace(/\s+/g, '-') + '-' + city.country.replace(/\s+/g, '-');
+      }
+      requestNomad(completeCity, function(err, data, body) {
+        // console.log('this is the data.body in getNomad in index.js: ', data.body);
+        res.send(data.body);
+      });
+    }
+  },
+
+  /************************************************
   // Requests to /save
   ************************************************/  
   save: {
