@@ -21,7 +21,7 @@ export default class signIn extends Component{
     super(props);
     this.state = {
       pic: {
-        uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
+        uri: 'https://s3.amazonaws.com/greenfield-hr44/Screen+Shot+2016-07-28+at+10.09.51+PM.png'
       },
       username: '',
       password: '',
@@ -40,7 +40,7 @@ export default class signIn extends Component{
       <View style={styles.container}>
       <ScrollView style={styles.container}>
         <Text style={styles.welcome}>
-          welcome to esc!
+          esc
           <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
@@ -71,7 +71,7 @@ export default class signIn extends Component{
           style={styles.button}
           onPress={this.goToSignUp.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>Sign Up </Text>
+            <Text style={styles.buttonText}>Sign up </Text>
           </View>
         </TouchableHighlight>
 
@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   welcome: {
-    fontSize: 35,
+    fontSize: 30,
+    fontFamily: 'Kohinoor Bangla',
     textAlign: 'center',
     marginTop: 100,
     marginBottom: 40,
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 15,
+    fontWeight: 'bold', 
     padding:15, 
     height:45, 
     overflow:'hidden', 

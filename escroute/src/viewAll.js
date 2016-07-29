@@ -16,7 +16,7 @@ export default class viewAll extends Component{
     super(props);
     this.state = {
       pic: {
-        uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
+        uri: 'https://s3.amazonaws.com/greenfield-hr44/Screen+Shot+2016-07-28+at+10.09.51+PM.png'
       },
       itineraries: []
     };
@@ -33,7 +33,9 @@ export default class viewAll extends Component{
 
         <Text style={styles.welcome}>
           Itineraries of {this.props.username}
+          <Image source={this.state.pic} style={{width: 30, height: 30}}/> 
         </Text>
+
         {this.state.itineraries.map(function(itinerary, index){
           return (
             <TouchableHighlight key = {index} onPress={ () => this.gotoViewOne(itinerary.id)}>
@@ -117,18 +119,25 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 25,
+    fontFamily: 'Kohinoor Bangla',
     textAlign: 'center',
-    margin: 30,
+    marginTop: 100,
+    marginBottom: 40,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input: {
+    height: 40,
+    fontSize: 15,
+    marginLeft: 10
   },
   buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontSize: 15,
+    fontWeight: 'bold', 
+    padding:15, 
+    height:45, 
+    overflow:'hidden', 
+    borderRadius:5, 
+    backgroundColor: '#4db6ac',
+    margin: 10
   }
 });
