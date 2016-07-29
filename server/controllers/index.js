@@ -6,6 +6,7 @@ var parser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 var requestYelp = require('./yelp').requestYelp;
+var requestNomad = require('./nomad').requestNomad;
 var cipher = Promise.promisify(bcrypt.hash);
 
 // var createSession = function(req, res, newUser) {
@@ -215,7 +216,6 @@ module.exports = {
     post: function(req, res) {
       var response = {};
       var location = req.body.location.trim().split(' ').join('+');
-      console.log(location);
       var options = {
         location: location,
         limit: 20,
@@ -237,7 +237,6 @@ module.exports = {
         }
       })
       .then(function(itinerary) {
-        console.log('itinerary', itinerary);
         db.Event.findAll({
           where: {
             ItineraryId: itinerary.dataValues.id
@@ -247,6 +246,30 @@ module.exports = {
           res.json(events);
         });
       })
+    }
+  },
+
+  /************************************************
+    // Requests to /city
+    ************************************************/  
+  city: {
+    getNomad: function(req, res) {
+      // var response = {};
+
+      var cityInfo = req.body.name + "-" + req.body.state + "-" + req.body.country;
+
+      cityInfo = cityInfo.split("");
+      for (var i = 0; i < cityInfo.length; i++) {
+        if (cityInfo[i] === " ") {
+          cityInfo[i] = "-";
+        }
+      }
+      cityInfo = cityInfo.join("");
+
+      requestNomad(cityInfo, function(err, data, body) {
+        // console.log('this is the response in getNomad: ', resp);
+        res.send(data.body);
+      });
     }
   },
 
