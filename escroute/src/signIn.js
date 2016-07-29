@@ -102,7 +102,9 @@ export default class signIn extends Component{
     };
     this.setState({password: ''});
     
-    fetch('http://localhost:3000/classes/login', {
+
+    fetch('https://esccc.herokuapp.com/classes/login', {
+    //fetch('http://localhost:3000/classes/login', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -112,33 +114,8 @@ export default class signIn extends Component{
       body: JSON.stringify(data)
     })
     .then(function(){
-      this.getRequest();
-      // go to viewALl
       this.goToViewAll();        
     }.bind(this));
-  }
-
-  // get reuqest
-  getRequest () {
-
-    fetch('http://localhost:3000/classes/userItineraries', 
-    {method: 'POST',
-     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-     },
-     credentials: 'same-origin',        
-     body: JSON.stringify({user: this.state.username})
-    })
-    .then(function(response) {
-      return response.json(); 
-    }).then((data) => {
-      this.setState({itineraries: data});
-      console.log('all itineraries', this.state.itineraries); 
-    })
-    .catch(function(err) {
-      console.log('err', err);
-    });
   }
 }
 

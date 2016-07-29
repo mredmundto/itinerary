@@ -64,41 +64,18 @@ export default class viewAll extends Component{
    this.props.navigator.push({name: 'viewAll'}); 
   }
 
-  // refactoring the AJAX call here
-  loginButton () {
-    var data = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    this.setState({password: ''});
-    
-    fetch('http://localhost:3000/classes/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(data)
-    })
-    .then(function(){
-      this.getRequest();
-      // go to viewALl
-      this.goToViewAll();        
-    }.bind(this));
-  }
-
   // get reuqest
   getRequest () {
-
-    fetch('http://localhost:3000/classes/userItineraries', 
+    
+    fetch('https://esccc.herokuapp.com/classes/userItineraries', 
     {method: 'POST',
      headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
      },
-     credentials: 'same-origin',        
-     body: JSON.stringify({user: this.props.username})
+     credentials: 'same-origin',
+     body: JSON.stringify({user: this.props.username})        
+     //body: JSON.stringify({user: this.props.username})
     })
     .then(function(response) {
       return response.json(); 
@@ -131,7 +108,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   buttonText: {
-    fontSize: 15,
+    fontSize: 10,
     fontWeight: 'bold', 
     padding:15, 
     height:45, 

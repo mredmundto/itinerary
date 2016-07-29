@@ -63,7 +63,7 @@ export default class viewOne extends Component{
 
   getRequest () {
 
-    fetch('http://localhost:3000/classes/itineraryEvents', 
+    fetch('https://esccc.herokuapp.com/classes/itineraryEvents', 
     {method: 'POST',
      headers: {
       'Accept': 'application/json',
