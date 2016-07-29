@@ -192,15 +192,17 @@ export default class ChoosePlannerView extends React.Component {
       lat: suggest.location.lat,
       lng: suggest.location.lng
     };
-    if (citySplit[2] === 'United States') {
-      cityData.state = citySplit[1];
+
+    if (citySplit.length > 2) {
+      if (citySplit[2] === 'United States') {
+        cityData.state = citySplit[1];
+      }
       cityData.country = citySplit[2];
-    } else {
-      cityData.country = citySplit[1];
     }
+
     this.setState({
       selectedCity: cityData,
-      location: cityData.name
+      location: cityData.name + ', ' + cityData.country
     });
     console.log('This is the selectedCity state: ', this.state.selectedCity);
   }

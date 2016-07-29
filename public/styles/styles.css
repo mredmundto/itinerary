@@ -89,7 +89,7 @@ font-family: 'Oleo Script Swash Caps', cursive;
   font-size: 18px;
   font-size: 1rem;
   position: relative;
-  width: 50%;
+  width: 100%;
   margin: 1em auto;
   text-align: left;
 }
@@ -104,7 +104,6 @@ font-family: 'Oleo Script Swash Caps', cursive;
 .geosuggest__input:focus {
   border-color: #267dc0;
   box-shadow: 0 0 0 transparent;
-  width: 300px;
 }
 .geosuggest__suggests {
   position: absolute;
