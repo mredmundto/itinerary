@@ -13,6 +13,12 @@ import {
 } from 'react-native';
 
 export default class viewAll extends Component{
+
+  componentDidMount(){ 
+    console.log('viewing all ')
+    console.log(this.props.username);
+  }
+
   render() {
     return (
       <View style={styles.container}>

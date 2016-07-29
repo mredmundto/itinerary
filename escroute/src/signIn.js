@@ -71,7 +71,7 @@ export default class signIn extends Component{
 
         <TouchableHighlight
           style={styles.button}
-          onPress={this.signUp.bind(this)}>
+          onPress={this.goToSignUp.bind(this)}>
           <View>
             <Text style={styles.buttonText}>Sign Up </Text>
           </View>
@@ -95,9 +95,16 @@ export default class signIn extends Component{
     );
   }
 
-  signUp (){
+  goToSignUp () {
     this.props.navigator.push({name: 'signUp'});
   }
+
+  goToViewAll (){
+   // setting parent class 
+   this.props.setName(this.state.username);
+   this.props.navigator.push({name: 'viewAll'}); 
+  }
+
   // refactoring the AJAX call here
   loginButton () {
     var data = {
@@ -116,7 +123,9 @@ export default class signIn extends Component{
       body: JSON.stringify(data)
     })
     .then(function(){
-      this.getRequest();       
+      this.getRequest();
+      // go to viewALl
+      this.goToViewAll();        
     }.bind(this));
   }
 
