@@ -21,7 +21,7 @@ export default class signIn extends Component{
     super(props);
     this.state = {
       pic: {
-        uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
+        uri: 'https://s3.amazonaws.com/greenfield-hr44/Screen+Shot+2016-07-28+at+10.09.51+PM.png'
       },
       username: '',
       password: '',
@@ -41,12 +41,12 @@ export default class signIn extends Component{
       <ScrollView style={styles.container}>
         <Text style={styles.welcome}>
  
-          SIGN UP HERE!
+          sign up
           <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
         <TextInput
-          style={{height: 40}}
+          style={styles.input}
           placeholder="Please enter the user name here"
           value = {this.state.username}
           onChangeText={(username) => this.setState({username})}
@@ -54,7 +54,7 @@ export default class signIn extends Component{
 
         <TextInput
         secureTextEntry = {true}
-          style={{height: 40}}
+          style={styles.input}
           placeholder="Please enter the password here"
           value = {this.state.password}
           onChangeText={(password) => this.setState({password})}
@@ -62,7 +62,7 @@ export default class signIn extends Component{
 
         <TextInput
         secureTextEntry = {true}
-          style={{height: 40}}
+          style={styles.input}
           placeholder="Please re-enter the password here"
           value = {this.state.confirmPassword}
           onChangeText={(confirmPassword) => this.setState({confirmPassword})}
@@ -72,7 +72,7 @@ export default class signIn extends Component{
           style={styles.button}
           onPress={this.signUp.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>Sign Up</Text>
+            <Text style={styles.buttonText}>Sign up</Text>
           </View>
         </TouchableHighlight>
 
@@ -80,7 +80,7 @@ export default class signIn extends Component{
           style={styles.button}
           onPress={this.backToSignIn.bind(this)}>
           <View>
-            <Text style={styles.buttonText}>back to sign in!</Text>
+            <Text style={styles.buttonText}>Back to sign in</Text>
           </View>
         </TouchableHighlight>
 
@@ -140,18 +140,25 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 25,
+    fontFamily: 'Kohinoor Bangla',
     textAlign: 'center',
-    margin: 30,
+    marginTop: 100,
+    marginBottom: 40,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input: {
+    height: 40,
+    fontSize: 15,
+    marginLeft: 10
   },
   buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontSize: 15,
+    fontWeight: 'bold', 
+    padding:15, 
+    height:45, 
+    overflow:'hidden', 
+    borderRadius:5, 
+    backgroundColor: '#4db6ac',
+    margin: 10
   }
 });
