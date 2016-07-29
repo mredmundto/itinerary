@@ -1,5 +1,6 @@
 import React from 'react';
 import {Summary} from './Summary';
+import {DayView} from './DayView';
 
 export default class ExpandedItineraryView extends React.Component {
 
@@ -103,7 +104,7 @@ export default class ExpandedItineraryView extends React.Component {
           this.state.expand ?
           <div>
             {_.range(1, this.props.itinerary.numDays + 1).map((day) => {
-                return (<DayView day={day} events={this.state.events}/>);
+                return (<DayView day={day} events={this.state.events} key={day} />);
               }
             )}
           </div>

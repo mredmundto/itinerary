@@ -144,36 +144,40 @@ export default class ChoosePlannerView extends React.Component {
   saveItinerary() {
     console.log('in the intinerary save');
     event.preventDefault();
-
-    var eventsToSave = _.map(this.state.events, (e, index) => {
-      var eventToSave = {
-        day: (Math.floor(index / 3) + 1),
-        location: this.state.location,
-        name: e.name,
-        slot: (index % 3),
-        image: e.image,
-        url: e.url,
-        snippet: e.snippet,
-        categories: e.categories,
-        address: e.address
-      };
-      return eventToSave;
-    });
-
-    var data = {
-      id: this.state.itineraryId,
-      events: eventsToSave,
-      user: this.state.user,
-      location: this.state.location,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      numDays: this.state.numDays
-    };
-    this.serverRequest('/classes/itineraries', data, (json) => {
-      this.setState({
-        itineraryId: json.id
+    //Check if user is logged in
+    if (!window.user) {
+      window.location.hash = 'login';
+    } else {
+      var eventsToSave = _.map(this.state.events, (e, index) => {
+        var eventToSave = {
+          day: (Math.floor(index / 3) + 1),
+          location: this.state.location,
+          name: e.name,
+          slot: (index % 3),
+          image: e.image,
+          url: e.url,
+          snippet: e.snippet,
+          categories: e.categories,
+          address: e.address
+        };
+        return eventToSave;
       });
-    });
+
+      var data = {
+        id: this.state.itineraryId,
+        events: eventsToSave,
+        user: this.state.user,
+        location: this.state.location,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        numDays: this.state.numDays
+      };
+      this.serverRequest('/classes/itineraries', data, (json) => {
+        this.setState({
+          itineraryId: json.id
+        });
+      });
+    }
   }
 
   render() {

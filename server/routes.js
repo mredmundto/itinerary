@@ -24,7 +24,7 @@ router.post('/save', util.checkUser, controllers.save.post);
 
 router.get('/events', util.checkUser, controllers.events.get);
 
-router.post('/events', util.checkUser, controllers.events.post);
+router.post('/events', controllers.events.post);
 
 router.post('/itineraryEvents', util.checkUser, controllers.events.getItineraryEvents);
 
