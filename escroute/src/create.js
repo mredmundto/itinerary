@@ -17,7 +17,7 @@ export default class create extends Component{
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          This is create
+          This is beta. Please go to our website to create new itineray
         </Text>
       </View>
     );
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
     margin: 10,
   },
   instructions: {
