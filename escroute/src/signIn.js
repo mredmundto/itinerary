@@ -26,7 +26,8 @@ export default class signIn extends Component{
       username: '',
       password: '',
       confirmPassword: '', 
-      itineraries: []
+      itineraries: [],
+      errorMesaage: ''
     };
   }
 
@@ -59,8 +60,6 @@ export default class signIn extends Component{
           onChangeText={(password) => this.setState({password})}
         />
 
-
-
         <TouchableHighlight
           style={styles.button}
           onPress={this.loginButton.bind(this)}>
@@ -77,19 +76,10 @@ export default class signIn extends Component{
           </View>
         </TouchableHighlight>
 
-        <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.username}
+        <Text style={{padding: 10, fontSize: 20}}>
+          {this.state.errorMesaage}
         </Text>
 
-        <Text style={styles.instructions}>
-          Login to show all itineraries
-        </Text>
-
-        {this.state.itineraries.map(function(itinerary, index){
-          return <Text key={index} style={styles.welcome}> {itinerary.location} by {itinerary.User.name}</Text>;  
-        }
-        
-        )}
       </ScrollView>
       </View>
     );

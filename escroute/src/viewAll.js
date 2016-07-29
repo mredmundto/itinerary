@@ -1,63 +1,3 @@
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  * @flow
-//  */
-
-// import React, { Component } from 'react';
-// import {
-//   AppRegistry,
-//   StyleSheet,
-//   Text,
-//   View
-// } from 'react-native';
-
-// export default class viewAll extends Component{
-
-//   componentDidMount(){ 
-//     console.log('viewing all ')
-//     console.log(this.props.username);
-//   }
-
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           This is view all. 
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
-
-
-
-
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -78,15 +18,11 @@ export default class viewAll extends Component{
       pic: {
         uri: 'https://vime.herokuapp.com/assets/images/grandiose-potatoe.gif'
       },
-      username: '',
-      password: '',
-      confirmPassword: '', 
       itineraries: []
     };
   }
 
   componentDidMount(){
-    console.log(this.props.username)
     this.getRequest ();
   }
 
@@ -94,24 +30,26 @@ export default class viewAll extends Component{
     return (
       <View style={styles.container}>
       <ScrollView style={styles.container}>
-  
 
-        <Text style={{padding: 10, fontSize: 42}}>
-          {this.state.username}
+        <Text style={styles.welcome}>
+          Itineraries of {this.props.username}
         </Text>
-
-        <Text style={styles.instructions}>
-          Login to show all itineraries
-        </Text>
-
         {this.state.itineraries.map(function(itinerary, index){
-          return <Text key={index} style={styles.welcome}> {itinerary.location} by {itinerary.User.name}</Text>;  
-        }
-        
+          return (
+            <TouchableHighlight key = {index} onPress={ () => this.gotoViewOne(index)}>
+            <Text key={index} style={styles.buttonText}> {itinerary.numDays} days trip to {itinerary.location} </Text>
+            </TouchableHighlight>
+          )}.bind(this)
         )}
       </ScrollView>
       </View>
     );
+  }
+
+  gotoViewOne(index){
+    console.log(this)
+    this.props.setCurrentItinerary(index); 
+    this.props.navigator.push({name: 'viewOne'});
   }
 
   goToSignUp () {

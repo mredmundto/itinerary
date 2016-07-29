@@ -11,12 +11,14 @@ import signIn from './src/signIn';
 import signUp from './src/signUp';
 import viewAll from './src/viewAll';
 import create from './src/create';
+import viewOne from './src/viewOne';
 
 var routes = {
   signIn: signIn, 
   signUp: signUp,
   viewAll: viewAll, 
-  create: create
+  create: create,
+  viewOne: viewOne 
 }; 
 
 class escroute extends Component {
@@ -24,10 +26,14 @@ class escroute extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username: 'default',
+      username: '',
       setName: (name) => {
         this.setState({username: name}); 
-      }
+      },
+      currentItinerary: null, 
+      setCurrentItinerary: (currentItinerary) => {
+        this.setState({currentItinerary: currentItinerary}); 
+      },
     };
   }
 
@@ -39,6 +45,8 @@ class escroute extends Component {
     navigator={navigator} 
     username={this.state.username}
     setName={this.state.setName}
+    currentItinerary={this.state.currentItinerary}
+    setCurrentItinerary={this.state.setCurrentItinerary}
     />;
   }
 
