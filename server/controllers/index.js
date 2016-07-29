@@ -6,6 +6,7 @@ var parser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 var requestYelp = require('./yelp').requestYelp;
+var requestNomad = require('./nomad').requestNomad;
 var cipher = Promise.promisify(bcrypt.hash);
 
 // var createSession = function(req, res, newUser) {
@@ -215,7 +216,6 @@ module.exports = {
     post: function(req, res) {
       var response = {};
       var location = req.body.location.trim().split(' ').join('+');
-      console.log(location);
       var options = {
         location: location,
         limit: 20,
@@ -237,7 +237,6 @@ module.exports = {
         }
       })
       .then(function(itinerary) {
-        console.log('itinerary', itinerary);
         db.Event.findAll({
           where: {
             ItineraryId: itinerary.dataValues.id
@@ -247,6 +246,57 @@ module.exports = {
           res.json(events);
         });
       })
+    }
+  },
+
+  /************************************************
+    // Requests to /city
+    ************************************************/  
+  city: {
+    getNomad: function(req, res) {
+      // var response = {};
+
+      var cityInfo = req.body.name + "-" + req.body.state + "-" + req.body.country;
+
+      cityInfo = cityInfo.split("");
+      for (var i = 0; i < cityInfo.length; i++) {
+        if (cityInfo[i] === " ") {
+          cityInfo[i] = "-";
+        }
+      }
+      cityInfo = cityInfo.join("");
+
+      requestNomad(cityInfo, function(err, data, body) {
+        // console.log('this is the response in getNomad: ', resp);
+        res.send(data.body);
+      });
+    }
+  },
+
+  /************************************************
+    // Requests to /city
+    ************************************************/  
+  city: {
+    getNomad: function(req, res) {
+      //split the city into an array
+      //[San Franciso, CA, United States]
+
+      //san-francisco-ca-united-states
+
+      //{name: "Oakland", lat: 37.8043637, lng: -122.2711137, state: "CA", country: "United States"}
+      var city = req.body;
+
+      var completeCity = '';
+
+      if (city.state) {
+        completeCity = city.name.replace(/\s+/g, '-') + '-' + city.state + '-' + city.country.replace(/\s+/g, '-');
+      } else {
+        completeCity = city.name.replace(/\s+/g, '-') + '-' + city.country.replace(/\s+/g, '-');
+      }
+      requestNomad(completeCity, function(err, data, body) {
+        // console.log('this is the data.body in getNomad in index.js: ', data.body);
+        res.send(data.body);
+      });
     }
   },
 

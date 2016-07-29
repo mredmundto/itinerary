@@ -1,5 +1,6 @@
 import React from 'react';
 import {PlannerView} from './PlannerView';
+import Geosuggest from 'react-geosuggest';
 
 export default class ChoosePlannerView extends React.Component {
 
@@ -19,7 +20,9 @@ export default class ChoosePlannerView extends React.Component {
       day: '1',
       slot: '1',
       selected: '',
-      itineraryId: null
+      itineraryId: null,
+      selectedCity: null,
+      nomadData: null
     };
   }
 
@@ -180,6 +183,66 @@ export default class ChoosePlannerView extends React.Component {
     }
   }
 
+  onSuggestSelect(suggest) {
+    //we receive the information as, "Sacramento, CA, United States"
+    //we split it so everything is its own string
+    var citySplit = suggest.label.split(', ');
+    var cityData = {
+      name: citySplit[0],
+      lat: suggest.location.lat,
+      lng: suggest.location.lng
+    };
+    if (citySplit[2] === 'United States') {
+      cityData.state = citySplit[1];
+      cityData.country = citySplit[2];
+    } else {
+      cityData.country = citySplit[1];
+    }
+    this.setState({
+      selectedCity: cityData,
+      location: cityData.name
+    });
+    console.log('This is the selectedCity state: ', this.state.selectedCity);
+  }
+
+  // serverRequest2(url, data) {
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(res => {
+  //     console.log('Successful serverRequest2 POST-request', res);
+  //     return res.json();
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+  // }
+
+  getNomad() {
+    console.log('getting nomad');
+    this.serverRequest(
+      '/classes/city',
+      this.state.selectedCity, this.formatNomadData.bind(this)
+    );
+  }
+
+  getData() {
+    console.log('getting getData');
+    this.getItinerary();
+    this.getNomad();
+  }
+
+  formatNomadData(data) {
+    this.setState({
+      nomadData: data.result[0].info.weather.type
+    });
+  }
+
   render() {
     return (
       <div>
@@ -189,9 +252,10 @@ export default class ChoosePlannerView extends React.Component {
             <div className='row'>
               <label>
                 Destination:
-                <div className="input-group">
-                  <input type='text' value={this.state.location} onChange={this.handleInputChange.bind(this)} id="location"></input>
+                <div>
+                  <Geosuggest className='geosuggest' placeholder='Search a city' onSuggestSelect={this.onSuggestSelect.bind(this)} />
                 </div>
+
               </label>
               <p></p>
               <label>
@@ -207,10 +271,14 @@ export default class ChoosePlannerView extends React.Component {
           </form>
           <p></p>
           <div className='planner-prefs'>
-            <button className="btn btn-success" onClick={this.getItinerary.bind(this)}>Blank Itinerary</button>
-            <button className="btn btn-success" onClick={this.getItinerary.bind(this)}>Preference-Based Itinerary</button>
+            <button className="btn btn-success" onClick={this.getData.bind(this)}>Blank Itinerary</button>
+            <button className="btn btn-success" onClick={this.getData.bind(this)}>Preference-Based Itinerary</button>
           </div>
         </div>
+
+        <h2>City Facts</h2>
+        <div>{this.state.nomadData}</div>
+
         <div>
           <PlannerView 
             location={this.state.location} 
