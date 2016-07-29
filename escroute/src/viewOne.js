@@ -15,6 +15,7 @@ export default class viewOne extends Component{
   constructor(props){
     super(props);
     this.state = {
+      yelp: []
     };
   }
 
@@ -28,47 +29,68 @@ export default class viewOne extends Component{
       <View style={styles.container}>
       <ScrollView style={styles.container}>
 
-        <Text style={styles.welcome}>
-          {this.props.currentItinerary + 1} trip of {this.props.username}
-        </Text>
+
+
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.back.bind(this)}>
+          <Text style={styles.welcome}>
+           Back to all trip
+          </Text>
+        </TouchableHighlight>
+
+        {this.state.yelp.map(function(event, index){
+          return (
+            <View key = {index}>
+              <Image source={ {uri: event.image}} style={{width: 80, height: 80}}/>        
+              <Text style={styles.buttonText}>Name: {event.name} {'\n'}Address: {event.address} {'\n'}{event.snippet}{'\n'}  </Text>      
+            </View>
+          )}.bind(this)
+        )}
+
       </ScrollView>
       </View>
     );
   }
 
+  back () {
+    this.props.navigator.pop();
+  } 
+
   getRequest () {
 
-    fetch('http://localhost:3000/classes/userItineraries', 
+    fetch('http://localhost:3000/classes/itineraryEvents', 
     {method: 'POST',
      headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
      },
      credentials: 'same-origin',        
-     body: JSON.stringify({user: this.props.username})
+     body: JSON.stringify({id: this.props.currentItinerary})
     })
     .then(function(response) {
+
       return response.json(); 
     }).then((data) => {
-      this.setState({itineraries: data});
-      console.log('all itineraries', this.state.itineraries); 
+      console.log('yelp data', data);
+      this.setState({yelp: data}); 
     })
     .catch(function(err) {
       console.log('err', err);
     });
+
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    margin: 10,
+    backgroundColor: 'white'
   },
   welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 30,
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 10
   },
   instructions: {
     textAlign: 'center',
@@ -76,8 +98,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontSize: 10
   }
 });

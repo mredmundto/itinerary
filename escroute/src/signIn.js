@@ -40,13 +40,12 @@ export default class signIn extends Component{
       <View style={styles.container}>
       <ScrollView style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to ESC!{'\n'}
-          Sign In here
+          welcome to esc!
           <Image source={this.state.pic} style={{width: 30, height: 30}}/>        
         </Text>
 
         <TextInput
-          style={{height: 40}}
+          style={styles.input}
           placeholder="Please enter the user name here"
           value = {this.state.username}
           onChangeText={(username) => this.setState({username})}
@@ -54,7 +53,7 @@ export default class signIn extends Component{
 
         <TextInput
         secureTextEntry = {true}
-          style={{height: 40}}
+          style={styles.input}
           placeholder="Please enter the password here"
           value = {this.state.password}
           onChangeText={(password) => this.setState({password})}
@@ -150,18 +149,23 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 35,
     textAlign: 'center',
-    margin: 30,
+    marginTop: 100,
+    marginBottom: 40,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input: {
+    height: 40,
+    fontSize: 15,
+    margin: 10
   },
   buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    fontSize: 15,
+    padding:15, 
+    height:45, 
+    overflow:'hidden', 
+    borderRadius:5, 
+    backgroundColor: '#4db6ac',
+    margin: 10
   }
 });

@@ -36,7 +36,7 @@ export default class viewAll extends Component{
         </Text>
         {this.state.itineraries.map(function(itinerary, index){
           return (
-            <TouchableHighlight key = {index} onPress={ () => this.gotoViewOne(index)}>
+            <TouchableHighlight key = {index} onPress={ () => this.gotoViewOne(itinerary.id)}>
             <Text key={index} style={styles.buttonText}> {itinerary.numDays} days trip to {itinerary.location} </Text>
             </TouchableHighlight>
           )}.bind(this)
