@@ -98,8 +98,10 @@ export default class signIn extends Component{
   }
   // refactoring the AJAX call here
 
-  goToViewAll (){
-   this.props.navigator.push({name: 'viewAll'}); 
+  goToCreate (){
+
+   this.props.setName(this.state.username);
+   this.props.navigator.push({name: 'create'}); 
   }
 
   signUp () {
@@ -121,8 +123,8 @@ export default class signIn extends Component{
         body: JSON.stringify(data)
       })
       .then(function(){
-        console.log('user created!');   
-        this.goToViewAll();     
+        
+        this.goToCreate();     
       }.bind(this));
     }else{
       this.setState({errorMessage: 'Passwords do not match'});

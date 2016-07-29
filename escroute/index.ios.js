@@ -21,9 +21,25 @@ var routes = {
 
 class escroute extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      username: 'default',
+      setName: (name) => {
+        this.setState({username: name}); 
+      }
+    };
+  }
+
   renderScene(route, navigator) {
     var Component = routes[route.name];
-    return <Component route={route} navigator={navigator} />;
+
+    return <Component 
+    route={route} 
+    navigator={navigator} 
+    username={this.state.username}
+    setName={this.state.setName}
+    />;
   }
 
   render (){
@@ -31,7 +47,7 @@ class escroute extends Component {
       <Navigator
         style={styles.container}
         initialRoute={{name: 'signIn'}}
-        renderScene={this.renderScene}
+        renderScene={this.renderScene.bind(this)}
         configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
         />
     );
