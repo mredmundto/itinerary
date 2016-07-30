@@ -23,7 +23,6 @@ export default class viewOne extends Component{
   }
 
   componentDidMount(){
-    console.log(this.props.currentItinerary);
     this.getRequest ();
   }
 
@@ -47,7 +46,7 @@ export default class viewOne extends Component{
           return (
             <View key = {index} style={styles.item}>
               <Text style={styles.text}>Name: {event.name} {'\n'}Address: {event.address} {'\n'}{event.snippet}{'\n'}  </Text>      
-              <Image source={ {uri: event.image}} style={{width: 160, height: 160, marginBottom: 10}}/>   
+              <Image source={ {uri: event.image}} style={styles.image}/>   
             </View>
           )}.bind(this)
         )}
@@ -106,13 +105,21 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
-    marginTop: 12
+    marginTop: 12,
+    marginLeft: 5
   },
   item: {
     borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#4db6ac', 
+    borderWidth: 2,
+    borderColor: '#4db6ac',
+    justifyContent: 'center',
+    alignItems: 'center',
     margin: 5
-  }
-  
+  },
+  image: {
+    justifyContent: "center",    //  <-- you can use "center", "flex-start",
+    width: 120, 
+    height: 120, 
+    marginBottom: 10
+  } 
 });

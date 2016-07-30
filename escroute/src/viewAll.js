@@ -49,7 +49,6 @@ export default class viewAll extends Component{
   }
 
   gotoViewOne(index){
-    console.log(this)
     this.props.setCurrentItinerary(index); 
     this.props.navigator.push({name: 'viewOne'});
   }
